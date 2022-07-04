@@ -1,19 +1,24 @@
 import { useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AllStates from './pages/AllStates';
+import MyState from './pages/MyState';
+import Login from './pages/Login';
+import SharedLayout from './pages/SharedLayout';
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [admin, setAdmin] = useState('');
 
   return (
-    <div className='App'>
-      <h3>Gas Prices</h3>
-      <nav style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-        <NavLink to='/all-states'>All States</NavLink>
-        <NavLink to='/my-state'>My State</NavLink>
-      </nav>
-      <Outlet />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<SharedLayout />}>
+          <Route path='admin' element={<Login setAdmin={setAdmin} />} />
+          <Route path='all-states' element={<AllStates />} />
+          <Route path='my-state' element={<MyState />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

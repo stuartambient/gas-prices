@@ -1,24 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+/* import useAuth from '../components/AuthProvider'; */
+import { AuthContext } from '../components/AuthProvider';
 
-const Login = props => {
-  const handleSubmit = e => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+function Login() {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let auth = useContext(AuthContext);
 
-    for (const [key, value] of formData) {
-      console.log(key, value);
-    }
-  };
+  let from = location.state?.from?.pathname || '/';
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    let formData = new FormData(event.currentTarget);
+    let username = formData.get('username');
+
+    auth.signin(username, () => {
+      navigate(from, { replace: true });
+    });
+  }
+
   return (
-    <>
-      <h3>Admin</h3>
+    <div>
+      <p>You must log in to view the page at {from}</p>
+
       <form onSubmit={handleSubmit}>
-        <input type='text' name='name' placeholder='name'></input>
-        <input type='password' name='password' placeholder='password'></input>
+        <label>
+          Username: <input name='username' type='text' />
+        </label>{' '}
         <button type='submit'>Login</button>
       </form>
-    </>
+    </div>
   );
-};
+}
 
 export default Login;

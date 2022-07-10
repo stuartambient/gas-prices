@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 /* import useAuth from '../components/AuthProvider'; */
 import { AuthContext } from '../components/AuthProvider';
@@ -15,7 +16,7 @@ function Login() {
     let formData = new FormData(event.currentTarget);
     let username = formData.get('username');
 
-    auth.signin(username, () => {
+    auth.signIn(username, () => {
       navigate(from, { replace: true });
     });
   }

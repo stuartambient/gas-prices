@@ -22,16 +22,15 @@ function Login() {
   }
 
   return (
-    <div>
-      <p>You must log in to view the page at {from}</p>
-
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username: <input name='username' type='text' />
-        </label>{' '}
-        <button type='submit'>Login</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} style={{ alignSelf: 'center' }}>
+      {/*  <p>You must log in to view the page at {from}</p> */}
+      <label>
+        <input name="username" type="text" placeholder="admin name" />
+      </label>{' '}
+      <button type="submit" style={{ textShadow: 'none', fontSize: '.75rem' }}>
+        Login
+      </button>
+    </form>
   );
 }
 

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 /* import useAuth from './AuthProvider'; */
 import { AuthContext } from '../components/AuthProvider';
+import Login from '../pages/Login';
 
 const AuthStatus = () => {
   /*   let auth = useAuth(); */
@@ -10,20 +11,28 @@ const AuthStatus = () => {
   let navigate = useNavigate();
 
   if (!auth.admin) {
-    return <p>You are not logged in</p>;
+    return (
+      <>
+        <div style={{ color: 'red', alignSelf: 'center' }}>
+          You are not logged in
+        </div>
+        <Login />
+      </>
+    );
   }
 
   return (
-    <p>
+    <div style={{ color: 'white', alignSelf: 'center' }}>
       Welcome {auth.admin}!{' '}
       <button
+        style={{ textShadow: 'none', fontSize: '.75rem' }}
         onClick={() => {
           auth.signout(() => navigate('/'));
         }}
       >
         Sign out
       </button>
-    </p>
+    </div>
   );
 };
 
